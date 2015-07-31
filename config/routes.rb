@@ -2,7 +2,20 @@ Rails.application.routes.draw do
   
   require 'api_v1'
   
-  devise_for :users
+  root 'home#index'
+  
+  devise_for :users, skip: [:registrations], path: "auth", 
+      path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret' },
+      controllers: { sessions: "users/sessions" }
+  
+  as :user do
+    get 'account/password/edit' => 'devise/registrations#edit', as: :edit_user_registration
+    patch 'account/password/update'  => 'devise/registrations#update', as: :user_registration
+  end
+  
+  resources :leaderboards
+  resources :apps
+  resources :users
 
   mount API::APIV1 => '/'
 end

@@ -6,7 +6,9 @@
       user:
         nickname: "昵称"
         avatar: "头像"
-        
+        email: "邮箱"
+        password: "密码"
+        current_password: "旧密码"
     errors:
       models:
         user: "用户"

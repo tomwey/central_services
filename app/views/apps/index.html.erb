@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-10">
+        <h5>App列表</h5>
+      </div>
+      <div class="col-sm-2">
+        <%= link_to "新建App", new_app_path, class: "btn btn-success pull-right" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Icon</th>
+          <th>App名</th>
+          <th>App Secret Key</th>
+          <th>Store Url</th>
+          <th>App类型</th>
+          <th>App平台</th>
+          <th>version</th>
+          <th>(Bundle id/package name)</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @apps.each do |app| %>
+          <tr>
+            <td><%= app.id %></td>
+            <td><%= image_tag app.icon.url(:normal), size: '48x48' %></td>
+            <td><%= app.name %></td>
+            <td><%= app.secret_key %></td>
+            <td><%= app.store_url %></td>
+            <td><%= app.app_type %></td>
+            <td><%= app.platform %></td>
+            <td><%= app.version %></td>
+            <td><%= app.app_id %></td>
+            <td>
+              <%= link_to "编辑", edit_app_path(app), class: "btn btn-xs btn-primary" %>
+              <%= link_to "删除", app_path(app), method: :delete, data: { confirm: "您确定吗？" }, class: "btn btn-xs btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

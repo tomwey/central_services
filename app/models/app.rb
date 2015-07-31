@@ -16,8 +16,10 @@
 #
 
 class App < ActiveRecord::Base
-  validates :name, :app_type, :platform, :version, :secret_key, presence: true
-  validates_uniqueness_of :secret_key
+  validates :name, :app_type, :platform, :version, presence: true
+  # validates_uniqueness_of :secret_key
+  
+  mount_uploader :icon, AvatarUploader 
   
   before_create :generate_secret_key
   def generate_secret_key

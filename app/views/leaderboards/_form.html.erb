@@ -1,0 +1,22 @@
+<%= simple_form_for(@leaderboard, html: { class: "form-horizontal" },wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+          
+  <div class="col-md-6 col-md-offset-3">
+    <%= f.input :name, label: "排行榜名称" %>
+        
+    <%= f.input :game_id, collection: App.where(app_type: '游戏').map { |g| ["#{g.name}—#{g.platform}", g.id] }, prompt: "--请选择所属游戏--", label: "所属游戏" %>
+    
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= f.submit "提交", class: "btn btn-primary" %>&emsp;<%= link_to '返回', apps_path, class: "btn btn-default" %>
+      </div>
+    </div>
+    
+  </div>
+
+<% end %>

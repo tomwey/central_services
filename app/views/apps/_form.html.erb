@@ -1,0 +1,36 @@
+<%= simple_form_for(@app, html: { class: "form-horizontal" },wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+          
+  <div class="col-md-6 col-md-offset-3">
+    <%= f.input :name, label: "App名称" %>
+    
+    <%- if @app.icon and @app.icon.url(:small) %>
+    <div class="col-sm-10 col-sm-offset-3">
+      <%= render_app_icon(@app) %>
+    </div>
+    <%- end %>
+    <%= f.input :icon, label: "App icon" %>
+    <%= f.hidden_field :icon_cache %>
+    
+    <%= f.input :app_type, collection: SiteConfig.app_types.split(','), prompt: "--请选择App类型--", label: "App类型" %>
+    <%= f.input :platform, collection: SiteConfig.app_platforms.split(','), prompt: "--请选择App平台--", label: "App平台" %>
+    
+    <%= f.input :version, label: "App版本号", placeholder: '1.0' %>
+    <%= f.input :app_id, label: "Bundle id / Package name", placeholder: "com.kekestudio.xxxxx" %>
+    
+    <%= f.input :store_url, label: "应用商店地址", placeholder: "http://" %>
+    
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= f.submit "提交", class: "btn btn-primary" %>&emsp;<%= link_to '返回', apps_path, class: "btn btn-default" %>
+      </div>
+    </div>
+    
+  </div>
+
+<% end %>

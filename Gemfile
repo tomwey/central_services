@@ -27,6 +27,8 @@ gem 'bootstrap_helper', '4.2.3'
 # 登陆
 gem 'devise'
 
+gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form', branch: 'master'
+
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'
 
