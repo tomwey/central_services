@@ -16,12 +16,12 @@
 #
 
 class App < ActiveRecord::Base
-  validates :name, :app_type, :platform, :version, :app_key, presence: true
-  validates_uniqueness_of :app_key
+  validates :name, :app_type, :platform, :version, :secret_key, presence: true
+  validates_uniqueness_of :secret_key
   
-  before_create :generate_app_key
-  def generate_app_key
-    self.app_key = SecureRandom.uuid.gsub('-','')
+  before_create :generate_secret_key
+  def generate_secret_key
+    self.secret_key = SecureRandom.uuid.gsub('-','')
   end
   
   def as_json(opts = {})

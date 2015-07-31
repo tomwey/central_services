@@ -18,7 +18,7 @@ module API
     class Leaderboard < BaseEntity
       expose :name, format_with: :null 
       expose :game_key do |model, opts|
-        model.game.app_key || ""
+        model.game.secret_key || ""
       end
     end
     

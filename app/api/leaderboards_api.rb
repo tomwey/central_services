@@ -2,12 +2,12 @@ module API
   
   class LeaderboardsAPI < Grape::API
     resource :leaderboards do
-      # 获取某个游戏下面的所有排行榜
+      # 1、获取某个游戏下面的所有排行榜
       params do
-        requires :app_key, type: String, desc: "App Key"
+        requires :app_secret_key, type: String, desc: "App Secret Key"
       end
       get do
-        @game = App.find_by(app_key: params[:app_key])
+        @game = App.find_by(secret_key: params[:app_secret_key])
         if @game.blank?
           return { code: 2001, message: 'Not Found Game' }
         end
@@ -20,29 +20,21 @@ module API
         render_json(@leaderboards, API::Entities::Leaderboard)
       end # end get /leaderboards
       
-      # 获取某个排行榜的信息
-      params do
-        requires :app_key, type: String, desc: "App Key"
-      end
-      get '/show/:leaderboard_id' do
-        
-        @game = App.find_by(app_key: params[:app_key])
-        if @game.blank?
-          return { code: 2001, message: 'Not Found Game' }
-        end
-        
-        @leaderboard = Leaderboard.find_by(id: params[:leaderboard_id], game_id: @game.id)
+      # 2、获取某个排行榜的信息
+      get '/show/:lb_secret_key' do
+                
+        @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
         
         render_json(@leaderboard, API::Entities::Leaderboard)
       end # end /show/12
       
-      # 为某个游戏创建一个排行榜
+      # 3、为某个游戏创建一个排行榜
       params do
-        requires :app_key, type: String, desc: "App Key"
+        requires :app_secret_key, type: String, desc: "App Key"
         requires :name, type: String, desc: "排行榜名称"
       end
       post do
-        @game = App.find_by(app_key: params[:app_key])
+        @game = App.find_by(secret_key: params[:app_secret_key])
         if @game.blank?
           return { code: 2001, message: 'Not Found Game' }
         end
@@ -62,18 +54,12 @@ module API
       # 获取排行榜数据
       params do
         requires :token, type: String, desc: "Token"
-        requires :lb_id, type: Integer, desc: "排行榜id"
-        requires :app_key, type: String, desc: "App Key"
+        requires :lb_secret_key, type: String, desc: "排行榜secret key"
       end
       get :players do
         user = authenticate!
-        
-        @game = App.find_by(app_key: params[:app_key])
-        if @game.blank?
-          return { code: 2001, message: 'Not Found Game' }
-        end
-        
-        @leaderboard = Leaderboard.find_by(game_id: @game.id, id: params[:lb_id])
+
+        @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
         if @leaderboard.blank?
           return { code: 2002, message: "Not Found Leaderboard" }
         end
@@ -87,7 +73,7 @@ module API
         
         @score = @leaderboard.scores.where(user_id: @user.id).first
         
-        { code: 0, message: 'ok', data: { total: Score.where(leaderboard_id: @leaderboard.id).count, game: @game, scores: @scores, me: @score || {} } }
+        { code: 0, message: 'ok', data: { total: Score.where(leaderboard_id: @leaderboard.id).count, game: @leaderboard.game, scores: @scores, me: @score || {} } }
         
       end # end get players
       
@@ -95,18 +81,12 @@ module API
       params do
         requires :score, type: Integer, desc: "当前分数"
         requires :token, type: String, desc: "Token"
-        requires :lb_id, type: Integer, desc: "排行榜id"
-        requires :app_key, type: String, desc: "App Key"
+        requires :lb_secret_key, type: String, desc: "排行榜secret key"
       end
       post :upload_score do
         user = authenticate!
         
-        @game = App.find_by(app_key: params[:app_key])
-        if @game.blank?
-          return { code: 2001, message: 'Not Found Game' }
-        end
-        
-        @leaderboard = Leaderboard.find_by(game_id: @game.id, id: params[:lb_id])
+        @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
         if @leaderboard.blank?
           return { code: 2002, message: "Not Found Leaderboard" }
         end
