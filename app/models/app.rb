@@ -24,5 +24,17 @@ class App < ActiveRecord::Base
     self.app_key = SecureRandom.uuid.gsub('-','')
   end
   
+  def as_json(opts = {})
+    {
+      id: self.id,
+      icon: self.icon_url,
+      store_url: self.store_url,
+    }
+  end
+  
+  def icon_url
+    self.icon.url(:big) || ""
+  end
+  
 end
 

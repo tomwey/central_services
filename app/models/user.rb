@@ -42,6 +42,15 @@ class User < ActiveRecord::Base
     self.avatar.url(:big) || ""
   end
   
+  def as_json(opts = {})
+    {
+      id: self.id,
+      nickname: self.nickname || "",
+      token: self.private_token || "",
+      avatar: self.avatar_url,
+    }
+  end
+  
   def send_password_reset
     begin  
       self[:reset_password_token] = SecureRandom.hex(3)  
