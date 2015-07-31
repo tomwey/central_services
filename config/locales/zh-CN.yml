@@ -2,34 +2,14 @@
   activerecord:
     models:
       user: "用户"
-      admin: "管理员"
-      category: "类别"
-      banner: "广告"
     attributes:
       user:
-        mobile: "手机"
         nickname: "昵称"
         avatar: "头像"
-        signature: "个性签名"
-      admin:
-        email: "邮箱"
-        password: "密码"
-        current_password: "旧密码"
-        password_confirmation: "确认密码"
-      category:
-        name: "类别名"
-        sort: "显示顺序"
-      banner:
-        image: "广告图片"
-        title: "标题"
-        body: "内容"
-        category_id: "所属类别"
         
     errors:
       models:
         user: "用户"
-        admin: "管理员"
-        category: "类别"
       messages:
         inclusion: "不包含于列表中"
         exclusion: "是保留关键字"
