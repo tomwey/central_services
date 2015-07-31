@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: site_configs
+#
+#  id          :integer          not null, primary key
+#  key         :string(255)
+#  value       :text
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class SiteConfig < ActiveRecord::Base
   validates :key, :value, :description, presence: true
   validates_uniqueness_of :key
