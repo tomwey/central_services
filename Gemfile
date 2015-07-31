@@ -14,6 +14,25 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+# 上传组件
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick','~> 4.2.7'#, require: false
+
+gem 'bootstrap-sass', '~> 3.2.0'
+
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'bootstrap_helper', '4.2.3'
+
+# 登陆
+gem 'devise'
+
+# YAML 配置信息
+gem 'settingslogic', '~> 2.0.9'
+
+# 解决大文件上传报内存问题：Cannot allocate memory - identify
+gem 'posix-spawn'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -25,6 +44,41 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
+gem 'grape'
+gem 'grape-entity'
+
+# gem 'state_machine'
+
+gem 'rest-client'
+
+gem 'newrelic-grape'
+
+gem 'rack-cors', require: 'rack/cors'
+gem 'rack-utf8_sanitizer'
+
+# Use unicorn as the app server
+gem 'unicorn'
+
+gem 'unicorn-worker-killer'
+
+# Use Capistrano for deployment
+group :development do
+  
+  # rails specific capistrano funcitons
+  gem 'capistrano-rails', '~> 1.1.0'
+
+  # integrate bundler with capistrano
+  gem 'capistrano-bundler'
+
+  # if you are using RBENV
+  gem 'capistrano-rbenv', "~> 2.0" 
+  
+  gem 'quiet_assets'
+  
+  gem 'annotate', '~> 2.6.5'
+end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
