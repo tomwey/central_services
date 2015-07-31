@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'daydayup'
+set :application, 'central_services'
 set :deploy_user, "deployer"
 
 set :scm, :git
