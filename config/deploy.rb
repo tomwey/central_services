@@ -16,11 +16,27 @@ set :keep_releases, 5
 
 set :linked_files, %w{config/database.yml config/config.yml}
 
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
+
+set(:config_files, %w(
+  nginx.conf
+  database.yml.example
+  unicorn.rb
+  unicorn_init.sh
+))
+
+set(:executable_config_files, %w(
+  unicorn_init.sh
+))
 
 set(:symlinks, [
   {
-    source: "nginx.conf"
+    source: "nginx.conf",
+    link: "/etc/nginx/sites-enabled/#{fetch(:full_app_name)}"
+  },
+  {
+    source: "unicorn_init.sh",
+    link: "/etc/init.d/unicorn_#{fetch(:full_app_name)}"
   }
 ])
 
@@ -30,7 +46,7 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command do
       on roles(:app), in: :sequence, wait: 1 do
-        execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
+        execute "/etc/init.d/unicorn_#{fetch(:full_app_name)} #{command}"
       end
     end
   end

@@ -1,15 +1,15 @@
 worker_processes 4
 
-root = "/home/deployer/apps/daydayup_production/current"
+root = "/home/deployer/apps/central_services_staging/current"
 working_directory root
 # shared_root = "/home/deployer/apps/shuiguoshe/shared"
 
-listen "/tmp/unicorn.daydayup.sock", :backlog => 64
-listen 4096, :tcp_nopush => false
+listen "/tmp/unicorn.central_services_staging.sock"#, :backlog => 64
+# listen 4096, :tcp_nopush => false
 
 timeout 30
 
-pid "#{root}/tmp/pids/unicorn_daydayup.pid"
+pid "#{root}/tmp/pids/unicorn.pid"
 
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
@@ -28,7 +28,7 @@ end
 before_fork do |server, worker|  
   # 参考 http://unicorn.bogomips.org/SIGNALS.html  
   # 使用USR2信号，以及在进程完成后用QUIT信号来实现无缝重启  
-  old_pid = root + '/tmp/pids/unicorn_daydayup.pid.oldbin'  
+  old_pid = root + '/tmp/pids/unicorn.pid.oldbin'  
   if File.exists?(old_pid) && server.pid != old_pid  
     begin  
       Process.kill("QUIT", File.read(old_pid).to_i)  

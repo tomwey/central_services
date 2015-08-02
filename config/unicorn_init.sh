@@ -12,8 +12,8 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/home/deployer/apps/daydayup_production/current
-PID=$APP_ROOT/tmp/pids/unicorn_daydayup.pid
+APP_ROOT=/home/deployer/apps/central_services_staging/current
+PID=$APP_ROOT/tmp/pids/unicorn.pid
 CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 AS_USER=deployer
 set -u

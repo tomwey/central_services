@@ -7,6 +7,12 @@ default: &default
 
 production:
   <<: *default
-  database: daydayup
+  database: central_services_pro
+  username: 
+  password: 
+
+staging:
+  <<: *default
+  database: central_services_stage
   username: 
   password: 
