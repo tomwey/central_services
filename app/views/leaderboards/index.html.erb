@@ -15,6 +15,7 @@
         <tr>
           <th>ID</th>
           <th>排行榜名</th>
+          <th>Secret Key</th>
           <th>所属游戏</th>
           <th>玩家数</th>
           <th>操作</th>
@@ -26,6 +27,7 @@
           <tr>
             <td><%= link_to leaderboard.id, leaderboard %></td>
             <td><%= leaderboard.name %></td>
+            <td><%= leaderboard.secret_key %></td>
             <td><%= leaderboard.game.try(:name) %></td>
             <td><%= leaderboard.scores.count %></td>
             <td>
