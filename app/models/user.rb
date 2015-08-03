@@ -27,6 +27,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
+  # has_many :authorizations, dependent: :destroy
+  
+  # validates_presence_of :uid, :provider
+  # validates_uniqueness_of :uid, :scope => :provider
+  
   mount_uploader :avatar, AvatarUploader    
   
   def ensure_private_token!

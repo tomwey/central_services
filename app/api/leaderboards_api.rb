@@ -51,14 +51,11 @@ module API
     end # end leaderboards resource
     
     resource :leaderboard do
-      # 获取排行榜数据
+      # 获取前50个排行榜数据
       params do
-        requires :token, type: String, desc: "Token"
         requires :lb_secret_key, type: String, desc: "排行榜secret key"
       end
       get :players do
-        user = authenticate!
-
         @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
         if @leaderboard.blank?
           return { code: 2002, message: "Not Found Leaderboard" }
@@ -71,11 +68,71 @@ module API
           @scores = @scores.paginate page: 1, per_page: 50
         end
         
-        @score = @leaderboard.scores.where(user_id: @user.id).first
+        # @score = @leaderboard.scores.where(user_id: @user.id).first
         
-        { code: 0, message: 'ok', data: { total: Score.where(leaderboard_id: @leaderboard.id).count, game: @leaderboard.game, scores: @scores, me: @score || {} } }
+        { code: 0, message: 'ok', data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores } }
+      end # end players
+      
+      # 获取与我相关的排行数据
+      params do
+        requires :token, type: String, desc: "Token"
+        requires :lb_secret_key, type: String, desc: "排行榜secret key"
+      end
+      get :me do
+        player = Player.find_by(private_token: params[:token])
         
-      end # end get players
+        if player.blank?
+          return { code: -1, message: "玩家未登录或者认证不正确" }
+        end
+        
+        @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
+        if @leaderboard.blank?
+          return { code: 2002, message: "Not Found Leaderboard" }
+        end
+        
+        my_score = Score.where(player_id: player.id).first
+        
+        scores = []
+        
+        first_three_scores = @leaderboard.scores.where('value < ?', my_score.value).order('value desc').limit(3)
+        first_three_scores = first_three_scores.sort_by{ |s| s.value }
+        
+        scores << first_three_scores
+        scores << my_score
+        
+        last_three_scores = @leaderboard.scores.where('value > ?', my_score.value).order('value asc').limit(3)
+        
+        scores << last_three_scores
+        
+        { code: 0, message: "ok", data: scores }
+        
+      end #end me
+      
+      # 获取排行榜数据
+      # params do
+      #   requires :token, type: String, desc: "Token"
+      #   requires :lb_secret_key, type: String, desc: "排行榜secret key"
+      # end
+      # get :players do
+      #   user = authenticate!
+      # 
+      #   @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
+      #   if @leaderboard.blank?
+      #     return { code: 2002, message: "Not Found Leaderboard" }
+      #   end
+      #   
+      #   @scores = @leaderboard.scores.sort_by_value
+      #   if params[:page]
+      #     @scores = @scores.paginate page: params[:page], per_page: page_size
+      #   else
+      #     @scores = @scores.paginate page: 1, per_page: 50
+      #   end
+      #   
+      #   @score = @leaderboard.scores.where(user_id: @user.id).first
+      #   
+      #   { code: 0, message: 'ok', data: { total: Score.where(leaderboard_id: @leaderboard.id).count, game: @leaderboard.game, scores: @scores, me: @score || {} } }
+      #   
+      # end # end get players
       
       # 上传分数
       params do

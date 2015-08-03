@@ -1,6 +1,5 @@
 module API
-  class UsersAPI < Grape::API
-    
+  class UsersAPI < Grape::API    
     resource :account do
       
       # 用户注册

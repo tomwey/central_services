@@ -3,6 +3,8 @@ require "helpers"
 require "entities"
 
 require "users_api"
+require "players_api"
+require "leaderboards_api"
 
 module API
   class APIV1 < Grape::API
@@ -28,8 +30,10 @@ module API
     
     helpers APIHelpers
     
+    mount API::PlayersAPI
+    mount API::LeaderboardsAPI
     # mount API::AuthCodesAPI
-    mount API::UsersAPI
+    # mount API::UsersAPI
     # mount API::CategoriesAPI
     # mount API::BannersAPI
     # mount API::GoalsAPI
