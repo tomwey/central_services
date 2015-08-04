@@ -8,6 +8,11 @@ class LeaderboardsController < ApplicationController
     @leaderboard = Leaderboard.new
   end
   
+  def show
+    @leaderboard = Leaderboard.find(params[:id])
+    @scores = @leaderboard.scores.sort_by_value.paginate page: params[:page], per_page: 30
+  end
+  
   def create
     @leaderboard = Leaderboard.new(leaderboard_params)
     if @leaderboard.save
