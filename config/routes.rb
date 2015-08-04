@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   
   resources :leaderboards
   resources :apps
-  resources :users
+  # resources :users
+  resources :players, only: [:index]
 
   mount API::APIV1 => '/'
 end
