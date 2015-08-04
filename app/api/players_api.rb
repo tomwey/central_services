@@ -3,7 +3,7 @@ module API
     resource :auth do
       params do
         optional :nickname, type: String, desc: "昵称"
-        optional :avatar, desc: "二进制图片数据"
+        optional :avatar, type: String, desc: "二进制图片数据"
         requires :uid, type: String, desc: "三方认证uid"
         requires :provider, type: String, desc: "三方认证名字，例如：Sina, Wechat"
       end
