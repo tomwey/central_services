@@ -30,7 +30,7 @@
         <% @apps.each do |app| %>
           <tr>
             <td><%= app.id %></td>
-            <td><%= image_tag app.icon.url(:normal), size: '48x48' %></td>
+            <td><%= render_app_icon(app) %></td>
             <td><%= app.name %></td>
             <td><%= app.secret_key %></td>
             <td><%= app.store_url %></td>
