@@ -141,16 +141,19 @@ module API
         requires :lb_secret_key, type: String, desc: "排行榜secret key"
       end
       post :upload_score do
-        user = authenticate!
+        player = Player.find_by(private_token: params[:token])
+        if player.blank?
+          return { code: -1, message: "玩家未登录或者认证不正确" }
+        end
         
         @leaderboard = Leaderboard.find_by(secret_key: params[:lb_secret_key])
         if @leaderboard.blank?
           return { code: 2002, message: "Not Found Leaderboard" }
         end
         
-        @score = @leaderboard.scores.where(user_id: user.id).first
+        @score = @leaderboard.scores.where(player_id: player.id).first
         if @score.blank?
-          @score = Score.new(value: params[:score].to_i, user_id: user.id, leaderboard_id: @leaderboard.id)
+          @score = Score.new(value: params[:score].to_i, player_id: player.id, leaderboard_id: @leaderboard.id)
         else
           @score.value = params[:score].to_i if params[:score].to_i > @score.value
         end
