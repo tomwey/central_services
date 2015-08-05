@@ -9,16 +9,18 @@ module API
       end
       post :bind do
         player = Player.find_by(uid: params[:uid], provider: params[:provider])
-        if player.present?
-          return { code: 0, message: "ok", data: player }
+        if player.blank?
+          player = Player.new(uid: params[:uid], provider: params[:provider])
+          player.nickname = params[:nickname] || Array.new(6){[*'0'..'9'].sample}.join
+        else
+          if params[:nickname]
+            player.nickname = params[:nickname]
+          end
         end
         
-        player = Player.new(uid: params[:uid], provider: params[:provider])
         if params[:avatar]
           player.avatar = params[:avatar]
         end
-        
-        player.nickname = params[:nickname] || Array.new(6){[*'0'..'9'].sample}.join
         
         if player.save
           player.ensure_private_token!
