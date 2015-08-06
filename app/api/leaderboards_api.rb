@@ -108,8 +108,7 @@ module API
         
         score_ids += last_three_score_ids
         
-        puts score_ids
-        @socres = @leaderboard.scores.includes(:player).where(id: score_ids).order('value desc, id desc')
+        @scores = @leaderboard.scores.includes(:player).where(id: score_ids).order('value desc, id desc')
         
         { code: 0, message: "ok", data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores || [] } }
         
