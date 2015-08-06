@@ -90,25 +90,26 @@ module API
           return { code: 2002, message: "Not Found Leaderboard" }
         end
         
-        my_score = Score.where(player_id: player.id).first
+        my_score = @leaderboard.scores.where(player_id: player.id).first
         
         if my_score.blank?
           return { code: -1, message: "您还没有上传分数" }
         end
         
-        scores = []
+        score_ids = []
         
         first_three_score_ids = @leaderboard.scores.select('id').where('value >= ? and id != ?', my_score.value, my_score.id).order('value asc, id desc').limit(3).map(&:id)
         
-        scores += first_three_score_ids
+        score_ids += first_three_score_ids
         
-        scores << my_score.id
+        score_ids << my_score.id
         
         last_three_score_ids = @leaderboard.scores.select('id').where('value < ?', my_score.value).order('value desc, id desc').limit(3).map(&:id)
         
-        scores += last_three_score_ids
+        score_ids += last_three_score_ids
         
-        @socres = Score.includes(:player).where(id: scores).order('value desc, id desc')
+        puts score_ids
+        @socres = @leaderboard.scores.includes(:player).where(id: score_ids).order('value desc, id desc')
         
         { code: 0, message: "ok", data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores || [] } }
         
