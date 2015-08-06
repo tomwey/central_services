@@ -92,6 +92,10 @@ module API
         
         my_score = Score.where(player_id: player.id).first
         
+        if my_score.blank?
+          return { code: -1, message: "您还没有上传分数" }
+        end
+        
         scores = []
         
         first_three_score_ids = @leaderboard.scores.select('id').where('value >= ? and id != ?', my_score.value, my_score.id).order('value asc, id desc').limit(3).map(&:id)
@@ -106,7 +110,7 @@ module API
         
         @socres = Score.includes(:player).where(id: scores).order('value desc, id desc')
         
-        { code: 0, message: "ok", data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores } }
+        { code: 0, message: "ok", data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores || [] } }
         
       end #end me
       
