@@ -106,7 +106,7 @@ module API
         
         @socres = Score.includes(:player).where(id: scores).order('value desc, id desc')
         
-        { code: 0, message: "ok", data: @socres }
+        { code: 0, message: "ok", data: { total: Score.where(leaderboard_id: @leaderboard.id).count, scores: @scores } }
         
       end #end me
       
