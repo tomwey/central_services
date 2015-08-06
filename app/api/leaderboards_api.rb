@@ -94,17 +94,19 @@ module API
         
         scores = []
         
-        first_three_scores = @leaderboard.scores.where('value < ?', my_score.value).order('value desc').limit(3)
-        first_three_scores = first_three_scores.sort_by{ |s| s.value }
+        first_three_score_ids = @leaderboard.scores.select('id').where('value >= ? and id != ?', my_score.value, my_score.id).order('value asc, id desc').limit(3).map(&:id)
         
-        scores << first_three_scores
-        scores << my_score
+        scores += first_three_score_ids
         
-        last_three_scores = @leaderboard.scores.where('value > ?', my_score.value).order('value asc').limit(3)
+        scores << my_score.id
         
-        scores << last_three_scores
+        last_three_score_ids = @leaderboard.scores.select('id').where('value < ?', my_score.value).order('value desc, id desc').limit(3).map(&:id)
         
-        { code: 0, message: "ok", data: scores }
+        scores += last_three_score_ids
+        
+        @socres = Score.includes(:player).where(id: scores).order('value desc, id desc')
+        
+        { code: 0, message: "ok", data: @socres }
         
       end #end me
       
