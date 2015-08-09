@@ -33,7 +33,7 @@
             <td width="20%"><%= render_device_info(feedback) %></td>
             <td width="5%"><%= "#{feedback.lang}_#{feedback.region}" %></td>
             <td width="10%"><%= feedback.udid %></td>
-            <td width="15%"><%= feedback.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td width="15%"><%= local_time(feedback.created_at) %></td>
           </tr>
         <% end %>
       </tbody>

@@ -31,7 +31,7 @@
               <p><%= score.value %></p>
             </td>
             <td><%= score.rank %></td>
-            <td><%= score.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            <td><%= local_time(score.updated_at) %></td>
           </tr>
         <% end %>
       </tbody>

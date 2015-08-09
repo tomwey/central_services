@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   
   resources :leaderboards
   resources :apps
+  resources :ads
   # resources :users
   resources :players, only: [:index]
   resources :feedbacks, only: [:index]

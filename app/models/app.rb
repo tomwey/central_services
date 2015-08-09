@@ -19,6 +19,8 @@ class App < ActiveRecord::Base
   validates :name, :app_type, :platform, :version, presence: true
   # validates_uniqueness_of :secret_key
   
+  has_and_belongs_to_many :ads
+  
   mount_uploader :icon, AvatarUploader 
   
   before_create :generate_secret_key
