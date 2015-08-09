@@ -5,6 +5,7 @@ require "entities"
 require "users_api"
 require "players_api"
 require "leaderboards_api"
+require "feedbacks_api"
 
 module API
   class APIV1 < Grape::API
@@ -30,8 +31,13 @@ module API
     
     helpers APIHelpers
     
+    # 排行榜接口
     mount API::PlayersAPI
     mount API::LeaderboardsAPI
+    
+    # 意见反馈接口
+    mount API::FeedbacksAPI
+    
     # mount API::AuthCodesAPI
     # mount API::UsersAPI
     # mount API::CategoriesAPI

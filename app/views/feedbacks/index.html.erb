@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-10">
+        <h5>意见反馈列表</h5>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Author</th>
+          <th>内容</th>
+          <th>所属App</th>
+          <th>App版本</th>
+          <th>设备信息</th>
+          <th>语言</th>
+          <th>UDID</th>
+          <th>At</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @feedbacks.each do |feedback| %>
+          <tr>
+            <td width="8%"><%= feedback.id %></td>
+            <td width="5%"><%= feedback.author %></td>
+            <td width="20%"><%= feedback.content %></td>
+            <td width="10%"><%= feedback.app.try(:name) %></td>
+            <td width="5%"><%= feedback.app_version %></td>
+            <td width="20%"><%= render_device_info(feedback) %></td>
+            <td width="5%"><%= "#{feedback.lang}_#{feedback.region}" %></td>
+            <td width="10%"><%= feedback.udid %></td>
+            <td width="15%"><%= feedback.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div style="text-align: center;"><%= will_paginate @feedbacks, renderer: BootstrapPagination::Rails %></div>
+

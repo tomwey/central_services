@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :apps
   # resources :users
   resources :players, only: [:index]
+  resources :feedbacks, only: [:index]
 
   mount API::APIV1 => '/'
 end
