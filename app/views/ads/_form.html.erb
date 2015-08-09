@@ -1,0 +1,31 @@
+<%= simple_form_for(@ad, html: { class: "form-horizontal" },wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+          
+  <div class="col-md-6 col-md-offset-3">
+    <%= f.input :ad_type, collection: Ad::AD_TYPES, prompt: '--请选择广告类型--', label: "广告类型" %>
+    
+    <div id="content-container">
+      <%= f.input :title, label: "标题" %>
+      <%= f.input :message, label: "内容", placeholder: "可选" %>
+    </div>
+    
+    <%= f.input :link, label: "链接地址", placeholder: "App商店地址" %>
+    <%= f.input :button_titles, label: "提示框按钮文字", placeholder: "多个按钮用英文逗号分隔，例：(取消,确定)" %>
+    <%= f.input :lang, collection: Ad::AD_LANGS, prompt: '--请选择广告支持的语言--', label: "支持的语言" %>
+    
+    <%= f.association :apps, as: :check_boxes, collection: App.all.to_a, label_method: :name, label: "所属App" %>
+        
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= f.submit "提交", class: "btn btn-primary" %>&emsp;<%= link_to '返回', ads_path, class: "btn btn-default" %>
+      </div>
+    </div>
+    
+  </div>
+
+<% end %>
