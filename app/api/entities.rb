@@ -29,6 +29,17 @@ module API
       expose :player, using: API::Entities::User
     end
     
+    class AdDetail < BaseEntity
+      # expose :ad_type, as: :type, format_with: :null
+      # expose :title, :message, :buttons, format_with: :null, if: lambda { |ad, opts| ad.ad_type == 1 }
+      # expose :link, format_with: :null
+      with_options(format_with: :null) do
+        expose :ad_type, as: :type
+        expose :title, :message, :buttons, if: lambda { |ad, opts| ad.ad_type == 1 }
+        expose :link
+      end
+    end
+    
     # class Note < BaseEntity
     #   expose :body, format_with: :null
     # end

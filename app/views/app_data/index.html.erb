@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-10">
+        <h5>数据统计列表</h5>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>UDID</th>
+          <th>App信息</th>
+          <th>设备信息</th>
+          <th>语言</th>
+          <th>屏幕尺寸</th>
+          <th>At</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @app_data.each do |data| %>
+          <tr>
+            <td width="8%"><%= data.id %></td>
+            <td width="20%"><%= data.udid %></td>
+            <td width="20%"><%= data.app_info %></td>
+            <td width="20%"><%= data.device_info %></td>
+            <td width="7%"><%= "#{data.language_code}_#{data.country_code}" %></td>
+            <td width="10%"><%= data.screen_size %></td>
+            <td width="15%"><%= local_time(data.created_at) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div style="text-align: center;"><%= will_paginate @app_data, renderer: BootstrapPagination::Rails %></div>
+

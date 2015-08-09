@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   # resources :users
   resources :players, only: [:index]
   resources :feedbacks, only: [:index]
+  resources :app_data, path: "analytics"
 
   mount API::APIV1 => '/'
 end

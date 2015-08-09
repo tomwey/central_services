@@ -6,6 +6,7 @@ require "users_api"
 require "players_api"
 require "leaderboards_api"
 require "feedbacks_api"
+require "ads_api"
 
 module API
   class APIV1 < Grape::API
@@ -37,6 +38,9 @@ module API
     
     # 意见反馈接口
     mount API::FeedbacksAPI
+    
+    # 广告接口
+    mount API::AdsAPI
     
     # mount API::AuthCodesAPI
     # mount API::UsersAPI

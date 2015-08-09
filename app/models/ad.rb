@@ -12,4 +12,10 @@ class Ad < ActiveRecord::Base
     apps.map(&:name).join(',')
   end
   
+  def buttons
+    return button_titles.split(',') if button_titles
+    
+    []
+  end
+  
 end
