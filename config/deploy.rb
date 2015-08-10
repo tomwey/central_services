@@ -4,6 +4,10 @@ lock '3.2.1'
 set :application, 'central_services'
 set :deploy_user, "deployer"
 
+# set :use_sudo, false
+
+set :pty, true
+
 set :scm, :git
 set :repo_url, "git@github.com:tomwey/#{fetch(:application)}.git"
 
@@ -29,8 +33,8 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # for details of operations
 set(:config_files, %w(
   nginx.conf
-  database.example.yml
-  config.example.yml
+  database.yml
+  config.yml
   log_rotation
   unicorn.rb
   unicorn_init.sh
