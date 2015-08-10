@@ -5,6 +5,8 @@ defaults: &defaults
     - "admin@admin.com"
   email_sender: 'noreply@shuiguoshe.com'
   upload_url: "http://<%= fetch(:server_name) %>:<%= fetch(:port) %>"
+  secret_key_base: 
+  devise_secret_key: 
 
 <%= fetch(:rails_env) %>:
   <<: *defaults
