@@ -29,16 +29,16 @@
       <tbody>
         <% @apps.each do |app| %>
           <tr>
-            <td><%= app.id %></td>
-            <td><%= render_app_icon(app) %></td>
-            <td><%= app.name %></td>
-            <td><%= app.secret_key %></td>
-            <td><%= app.store_url %></td>
-            <td><%= app.app_type %></td>
-            <td><%= app.platform %></td>
-            <td><%= app.version %></td>
-            <td><%= app.app_id %></td>
-            <td>
+            <td width="6%"><%= app.id %></td>
+            <td width="10%"><%= render_app_icon(app) %></td>
+            <td width="8%"><%= app.name %></td>
+            <td width="20%"><%= app.secret_key %></td>
+            <td width="20%"><%= app.store_url %></td>
+            <td width="5%"><%= app.app_type %></td>
+            <td width="5%"><%= app.platform %></td>
+            <td width="5%"><%= app.version %></td>
+            <td width="10%"><%= app.app_id %></td>
+            <td width="10%">
               <%= link_to "编辑", edit_app_path(app), class: "btn btn-xs btn-primary" %>
               <%= link_to "删除", app_path(app), method: :delete, data: { confirm: "您确定吗？" }, class: "btn btn-xs btn-danger" %>
             </td>
