@@ -6,7 +6,7 @@ set :deploy_user, "deployer"
 
 # set :use_sudo, false
 
-set :pty, true
+# set :pty, true
 
 set :scm, :git
 set :repo_url, "git@github.com:tomwey/#{fetch(:application)}.git"
