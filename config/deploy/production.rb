@@ -12,7 +12,7 @@ role :web, %w{deployer@120.132.57.133}
 role :db,  %w{deployer@120.132.57.133}
 
 set :server_name, "120.132.57.133"
-set :port, "6666"
+set :port, "8181"
 
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 # set :server_name, "www.shuiguoshe.com shuiguoshe.com"

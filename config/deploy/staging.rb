@@ -20,6 +20,9 @@
 set :stage, :staging
 set :branch, 'master'
 
+set :server_name, "120.132.57.133"
+set :port, "8080"
+
 role :app, %w{deployer@120.132.57.133}
 role :web, %w{deployer@120.132.57.133}
 role :db,  %w{deployer@120.132.57.133}
@@ -39,7 +42,7 @@ set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
 set :rails_env, :staging
 
-set :unicorn_worker_count, 4
+set :unicorn_worker_count, 2
 
 set :enable_ssl, false
 
