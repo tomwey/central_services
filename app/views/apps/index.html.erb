@@ -29,7 +29,7 @@
         <% @apps.each do |app| %>
           <tr>
             <td width="6%"><%= app.id %></td>
-            <td width="10%"><%= render_app_icon(app) %></td>
+            <td width="6%"><%= render_app_icon(app) %></td>
             <td width="15%"><%= app.name %></td>
             <td width="10%"><%= link_to('去商店', app.store_url, target: '__blank') if app.store_url and app.store_url.present? %></td>
             <td width="5%"><%= app.app_type %></td>
