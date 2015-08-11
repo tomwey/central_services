@@ -16,7 +16,6 @@
           <th>ID</th>
           <th>Icon</th>
           <th>App名</th>
-          <th>App Secret Key</th>
           <th>Store Url</th>
           <th>App类型</th>
           <th>App平台</th>
@@ -31,9 +30,8 @@
           <tr>
             <td width="6%"><%= app.id %></td>
             <td width="10%"><%= render_app_icon(app) %></td>
-            <td width="8%"><%= app.name %></td>
-            <td width="20%"><%= app.secret_key %></td>
-            <td width="20%"><%= app.store_url %></td>
+            <td width="15%"><%= app.name %></td>
+            <td width="15%"><%= app.store_url %></td>
             <td width="5%"><%= app.app_type %></td>
             <td width="5%"><%= app.platform %></td>
             <td width="5%"><%= app.version %></td>
