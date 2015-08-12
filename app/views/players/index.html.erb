@@ -15,6 +15,9 @@
           <th>昵称</th>
           <th>UID</th>
           <th>Provider</th>
+          <th>设备信息</th>
+          <th>语言</th>
+          <th>屏幕大小</th>
           <th>At</th>
         </tr>
       </thead>
@@ -27,6 +30,9 @@
             <td><%= player.nickname %></td>
             <td><%= player.uid %></td>
             <td><%= player.provider %></td>
+            <td><%= "【#{player.model}】#{player.platform} #{player.os_version}" if player.model %></td>
+            <td><%= "#{player.language_code}_#{player.country_code}" %></td>
+            <td><%= player.screen_size %></td>
             <td><%= local_time(player.created_at) %></td>
           </tr>
         <% end %>
