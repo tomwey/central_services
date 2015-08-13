@@ -67,11 +67,11 @@ module API
         end
         
         ad = Ad.find_by(id: params[:ad_id])
-        if ad.blank?
-          return { code: -1, message: "Ads not found for id #{params[:ad_id]}" }
-        end
-        
-        track = AdTrack.new(ad_id: ad.id, 
+        # if ad.blank?
+        #   return { code: -1, message: "Ads not found for id #{params[:ad_id]}" }
+        # end
+        ad_id = ad.blank? ? -1 : ad.id
+        track = AdTrack.new(ad_id: ad_id, 
                             app_id: @app.id, 
                             app_version: params[:bv],
                             platform: params[:p],
