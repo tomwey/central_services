@@ -24,6 +24,9 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap_helper', '4.2.3'
 
+# 添加富文本编辑器
+gem 'redactor-rails'
+
 # 登陆
 gem 'devise'
 

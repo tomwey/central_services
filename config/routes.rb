@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  mount RedactorRails::Engine => '/redactor_rails'
   require 'api_v1'
   
   root 'home#index'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   resources :leaderboards
   resources :apps
   resources :ads
+  resources :wikis, path: "docs"
+  
   # resources :users
   resources :players, only: [:index]
   resources :feedbacks, only: [:index]
