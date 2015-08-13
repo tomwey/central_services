@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-10">
+        <h5>配置列表</h5>
+      </div>
+      <div class="col-sm-2">
+        <%= link_to "新建配置", new_site_config_path, class: "btn btn-success pull-right" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>配置名</th>
+          <th>配置值</th>
+          <th>配置描述</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @site_configs.each do |site_config| %>
+          <tr>
+            <td><%= site_config.id %></td>
+            <td width="6%"><%= site_config.key %></td>
+            <td width="40%"><%= site_config.value %></td>
+            <td><%= site_config.description %></td>
+            <td width="12%">
+              <%= link_to "编辑", [:edit, site_config], class: "btn btn-xs btn-primary" %>
+              <%= link_to "删除", site_config, method: :delete, data: { confirm: "你确定吗？" }, class: "btn btn-danger btn-xs" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
