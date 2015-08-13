@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :apps
   resources :ads
   resources :wikis, path: "docs"
+  resources :site_configs
   
   # resources :users
   resources :players, only: [:index]
