@@ -31,8 +31,13 @@ class App < ActiveRecord::Base
   def as_json(opts = {})
     {
       id: self.id,
+      name: self.name || "",
+      version: self.version || "",
       icon: self.icon_url,
-      store_url: self.store_url,
+      bundle: self.app_id || "",
+      app_type: self.app_type || "",
+      platform: self.platform || "",
+      store_url: self.store_url || "",
     }
   end
   

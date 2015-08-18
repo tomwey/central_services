@@ -7,6 +7,7 @@ require "players_api"
 require "leaderboards_api"
 require "feedbacks_api"
 require "ads_api"
+require "apps_api"
 
 module API
   class APIV1 < Grape::API
@@ -31,6 +32,9 @@ module API
     end
     
     helpers APIHelpers
+    
+    # 获取app信息
+    mount API::AppsAPI
     
     # 排行榜接口
     mount API::PlayersAPI
