@@ -36,6 +36,8 @@ module API
       with_options(format_with: :null) do
         expose :ad_type, as: :type
         expose :title, :message, :buttons, if: lambda { |ad, opts| ad.ad_type == 1 }
+        expose :landscape_image_url, as: :landscape_image, if: lambda { |ad, opts| ad.ad_type == 2 }
+        expose :portrait_image_url, as: :portrait_image, if: lambda { |ad, opts| ad.ad_type == 2 }
         expose :link
       end
     end

@@ -23,4 +23,20 @@ class Ad < ActiveRecord::Base
     []
   end
   
+  def landscape_image_url
+    if self.landscape_image
+      self.landscape_image.url(:large)
+    else
+      ""
+    end
+  end
+  
+  def portrait_image_url
+    if self.portrait_image
+      self.portrait_image.url(:large)
+    else
+      ""
+    end
+  end
+  
 end

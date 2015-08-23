@@ -39,6 +39,15 @@
 <% content_for :scripts do %>
 <script>
   $(document).ready(function() {
+    
+    <% if @ad.ad_type == 1 %>
+    $('#image-container').hide();
+    $('#content-container').show();
+    <% elsif @ad.ad_type == 2 %>
+    $('#image-container').show();
+    $('#content-container').hide();
+    <% end %>
+    
     $('#ad_ad_type').change(function() {
       var type = parseInt($(this).val());
       if (type == 1) {
