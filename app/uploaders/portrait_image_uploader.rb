@@ -1,26 +1,20 @@
 # encoding: utf-8
 
 class PortraitImageUploader < BaseUploader
-
-  version :thumb do
-    process resize_to_fill: [320, 568]
-  end
-  
-  version :medium do
-    process resize_to_fill: [640, 1138]
-  end
-  
+    
   version :big do
-    process resize_to_fill: [750, 1334]
+    process resize_to_fill: [594, 960]
+    # process resize_to_fill: [750, 1334]
   end
   
   version :large do
-    process resize_to_fill: [900, 1600]
+    process resize_to_fill: [824, 1334]
+    # process resize_to_fill: [900, 1334]
   end
 
-  version :normal do
-    process resize_to_fill: [1080, 1920]
-  end
+  # version :normal do
+  #   process resize_to_fill: [1080, 1920]
+  # end
 
   def filename
     if super.present?

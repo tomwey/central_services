@@ -2,24 +2,34 @@
 
 class LandscapeImageUploader < BaseUploader
 
-  version :thumb do
-    process resize_to_fill: [568, 320]
-  end
-  
-  version :medium do
-    process resize_to_fill: [1136, 640]
-  end
+  # version :thumb do
+  #   process resize_to_fill: [568, 320]
+  # end
+  #
+  # version :medium do
+  #   process resize_to_fill: [1136, 640]
+  # end
+  #
+  # version :big do
+  #   process resize_to_fill: [1334, 750]
+  # end
+  #
+  # version :large do
+  #   process resize_to_fill: [1600, 900]
+  # end
+  #
+  # version :normal do
+  #   process resize_to_fill: [1920, 1080]
+  # end
   
   version :big do
-    process resize_to_fill: [1334, 750]
+    process resize_to_fill: [960, 594]
+    # process resize_to_fill: [750, 1334]
   end
   
   version :large do
-    process resize_to_fill: [1600, 900]
-  end
-
-  version :normal do
-    process resize_to_fill: [1920, 1080]
+    process resize_to_fill: [1334, 824]
+    # process resize_to_fill: [900, 1334]
   end
 
   def filename
