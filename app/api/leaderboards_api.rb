@@ -151,6 +151,11 @@ module API
         requires :b, type: String, desc: "当前app对应的包名或者bundle id"
       end
       post :upload_score do
+        
+        if params[:score].blank? or params[:score].to_i <= 0
+          return { code: -2, message: "不正确的分数" }
+        end
+        
         player = Player.find_by(private_token: params[:token])
         if player.blank?
           return { code: -1, message: "玩家未登录或者认证不正确" }
